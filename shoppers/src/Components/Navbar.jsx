@@ -65,7 +65,7 @@ import {
             >
           
 
-            <RouterLink  >
+            <RouterLink >
                 DARK MODE
             </RouterLink>
             <RouterLink  >
@@ -115,7 +115,7 @@ import {
                 ACTIVEWEAR
             </RouterLink>
             <RouterLink   >
-                SHIRTS
+                SALE
             </RouterLink>
               
             

@@ -1,4 +1,6 @@
 import {Box,Flex,Text} from "@chakra-ui/react"
+import Footer from '../Components/Footer';
+
 
 function Homepage() {
     return (
@@ -104,6 +106,7 @@ function Homepage() {
     
                 </Box>
             </Flex>
+            <Footer />
        </Box>
     );
   }
