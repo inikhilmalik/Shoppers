@@ -3,11 +3,11 @@ import axios from "axios";
 import Card from "../Components/Card";
 import { Grid, GridItem, Box, Flex, Input, Select, Button, Spinner } from '@chakra-ui/react'
 import Footer from '../Components/Footer';
+import Navbar from "../Components/Navbar";
 
 
-
-const getData = (order,sort) => {
-  return axios.get(`https://long-blue-goshawk-suit.cyclic.app/tshirt`)
+const getData = (page) => {
+  return axios.get(`https://long-blue-goshawk-suit.cyclic.app/tshirt?_page=${page}&_limit=20`)
 }
 
 function Tshirt() {
@@ -16,10 +16,11 @@ function Tshirt() {
   const [error, setError] = useState(false);
   const [order, setOrder] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
+  const [page,setPage]=useState(1);
 
   const fetched = () => {
     setLoading(true);
-    getData()
+    getData(page)
       .then((res) => setData(res.data))
       .catch((err) => setError(err))
       .finally(()=>setLoading(false))
@@ -27,14 +28,14 @@ function Tshirt() {
 
   useEffect(() => {
     fetched();
-  }, [])
+  }, [page])
 
   useEffect(() => {
     if(searchQuery)
     {
       // setLoading(true)
       let params=searchQuery?{q:searchQuery}:{}
-      axios.get(`https://long-blue-goshawk-suit.cyclic.app/shirt?_sort=price&_order=${order}`,{
+      axios.get(`https://long-blue-goshawk-suit.cyclic.app/tshirt?_page=${page}&_limit=20&_sort=price&_order=${order}`,{
         params
       })
       .then((res) => setData(res.data))
@@ -43,7 +44,7 @@ function Tshirt() {
     else if(order)
     {
       setLoading(true)
-      axios.get(`https://long-blue-goshawk-suit.cyclic.app/tshirt?_sort=price&_order=${order}`)
+      axios.get(`https://long-blue-goshawk-suit.cyclic.app/tshirt?_page=${page}&_limit=20&_sort=price&_order=${order}`)
       .then((res) => setData(res.data))
       .catch((err) => setError(err))
       .finally(()=>setLoading(false))
@@ -62,17 +63,17 @@ function Tshirt() {
   {
     return <h1>Something Went Wrong</h1>
   }
-  console.log(searchQuery)
-  console.log(order)
+  console.log(data)
+  // console.log(order)
   return (
     <Box m="auto" width={"92%"} mt={2} >
       <Box m="auto" width={"98%"} >
         <Flex justifyContent={"space-between"}>
 
           <Box >
-            <Button  bg={"white"} borderRadius="0px" >PRE</Button>
-            <Button m={1} borderRadius="50%" >1</Button>
-            <Button  bg={"white"} borderRadius="0px" >NEXT</Button>
+            <Button isDisabled={page===1} onClick={()=>setPage(page-1)}  bg={"white"} borderRadius="0px" >PRE</Button>
+            <Button m={1} borderRadius="50%" >{page}</Button>
+            <Button isDisabled={page===Math.ceil(40/20)} onClick={()=>setPage(page+1)} bg={"white"} borderRadius="0px" >NEXT</Button>
           </Box>
 
           <Box >
@@ -98,8 +99,8 @@ function Tshirt() {
         <Grid templateColumns='repeat(4, 1fr)'   >
           {
             data.map((item) => (
-              <GridItem  >
-                <Card key={item.id} id={item.id} image={item.url} title={item.title} price={item.price} />
+              <GridItem key={item.id} >
+                <Card  id={item.id} image={item.url} title={item.title} price={item.price} />
               </GridItem>
             ))
           }
@@ -112,3 +113,6 @@ function Tshirt() {
 }
 
 export default Tshirt;
+
+
+  // https://long-blue-goshawk-suit.cyclic.app
