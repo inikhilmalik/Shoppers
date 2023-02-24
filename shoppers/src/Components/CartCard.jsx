@@ -30,12 +30,12 @@ import {
       const handleDelete=(id)=>{
         handleRemove(id)
     }
-    
+
     return (
       <Flex p={3}  alignItems="center" justifyContent="center">
         <Box
           bg={useColorModeValue('white', 'gray.800')}
-          width="320px"
+          width="340px"
           borderWidth="1px"
           rounded="lg"
           shadow="lg"
@@ -82,6 +82,7 @@ import {
                 </Box>
                 {data.price}
               </Box>
+            
               <Tooltip
                 label="Remove from cart"
                 bg="white"
