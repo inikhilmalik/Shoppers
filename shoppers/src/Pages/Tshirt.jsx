@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect,useContext } from "react";
 import axios from "axios";
 import Card from "../Components/Card";
 import { Grid, GridItem, Box, Flex, Input, Select, Button, Spinner } from '@chakra-ui/react'
 import Footer from '../Components/Footer';
 import Navbar from "../Components/Navbar";
+import { ThemeContext } from "../ContextApi/ThemeContext";
 
 
 const getData = (page) => {
@@ -17,6 +18,8 @@ function Tshirt() {
   const [order, setOrder] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [page,setPage]=useState(1);
+  const {theme}=useContext(ThemeContext)
+
 
   const fetched = () => {
     setLoading(true);
@@ -66,25 +69,27 @@ function Tshirt() {
   console.log(data)
   // console.log(order)
   return (
-    <Box m="auto" width={"92%"} mt={2} >
+    <Box bg={theme?"black":"white"}>
+      <Box m="auto" width={"92%"} p={2} >
       <Box m="auto" width={"98%"} >
         <Flex justifyContent={"space-between"}>
 
           <Box >
-            <Button isDisabled={page===1} onClick={()=>setPage(page-1)}  bg={"white"} borderRadius="0px" >PRE</Button>
+            <Button isDisabled={page===1} onClick={()=>setPage(page-1)} color={theme?"white":"black"} bg={theme?"black":"white"} borderRadius="0px" >PRE</Button>
             <Button m={1} borderRadius="50%" >{page}</Button>
-            <Button isDisabled={page===Math.ceil(40/20)} onClick={()=>setPage(page+1)} bg={"white"} borderRadius="0px" >NEXT</Button>
+            <Button isDisabled={page===Math.ceil(40/20)} onClick={()=>setPage(page+1)} color={theme?"white":"black"} bg={theme?"black":"white"} borderRadius="0px" >NEXT</Button>
           </Box>
 
           <Box >
             <Flex >
               <Input placeholder="SEARCH BRANDS"
-               border={"1px solid black"}
+               border={theme?"1px solid white":"1px solid black"}
                borderRadius="0px" 
                onChange={(e)=>setSearchQuery(e.target.value)}
+               color={theme?"white":"black"}
                 />
 
-              <Select onChange={handleSort} ml={"10px"} width={"280px"} placeholder="SORT" border={"1px solid black"} borderRadius="0px" >
+              <Select onChange={handleSort} ml={"10px"} width={"280px"} color={theme?"white":"black"} placeholder="SORT"  border={theme?"1px solid white":"1px solid black"} borderRadius="0px" >
                 <option value="asc">PRICE (LOW-HIGH)</option>
                 <option value="desc">PRICE (HIGH-LOW)</option>
               </Select>
@@ -96,7 +101,7 @@ function Tshirt() {
       </Box >
 
       <Box >
-        <Grid templateColumns='repeat(4, 1fr)'   >
+        <Grid templateColumns={{sm:'repeat(1, 1fr)',md:'repeat(2, 1fr)',lg:'repeat(3, 1fr)',"2xl":'repeat(4, 1fr)'}}   >
           {
             data.map((item) => (
               <GridItem key={item.id} >
@@ -109,6 +114,7 @@ function Tshirt() {
       </Box>
       <Footer />
     </Box >
+    </Box>
   );
 }
 
