@@ -13,8 +13,12 @@ import { BsStar, BsStarFill, BsStarHalf } from 'react-icons/bs';
 import { FiShoppingCart } from 'react-icons/fi';
 import axios from "axios"
 import { useState } from 'react';
+import {Link as RouterLink} from "react-router-dom"
+import { ThemeContext } from "../ContextApi/ThemeContext";
+import { useContext } from 'react';
 
 function Card({ title, image, price, id }) {
+  const {theme}=useContext(ThemeContext)
 
   const data = {
     isNew: true,
@@ -29,9 +33,10 @@ function Card({ title, image, price, id }) {
   }
 
   return (
-    <Flex p={3} alignItems="center" justifyContent="center">
+    <Flex p={3} alignItems="center" justifyContent="center"  >
       <Box
-        bg={useColorModeValue('white', 'gray.800')}
+        bg={theme?"black":"white"}
+        color={theme?"white":"black"}
         width="320px"
         borderWidth="1px"
         rounded="lg"
@@ -47,12 +52,13 @@ function Card({ title, image, price, id }) {
             bg="red.200"
           />
         )}
-
+        <RouterLink to={`/shirt/${id}`} >
         <Image
           src={data.imageURL}
           alt={`Picture of ${data.name}`}
           roundedTop="lg"
-        />
+          />
+          </RouterLink>
 
         <Box p="6">
           <Box d="flex" alignItems="baseline" textAlign={"start"}>
@@ -75,8 +81,8 @@ function Card({ title, image, price, id }) {
           </Flex>
 
           <Flex justifyContent="space-between"  >
-            <Box fontSize="2xl" color={useColorModeValue('gray.800', 'white')}>
-              <Box as="span" color={'gray.600'} fontSize="lg">
+            <Box fontSize="2xl" color={theme?"white":"black"}>
+              <Box as="span" color={theme?'white':"gray.500"} fontSize="lg">
                 Rs.
               </Box>
               {data.price}

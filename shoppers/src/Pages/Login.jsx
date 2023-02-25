@@ -14,14 +14,17 @@ import { useState,useContext } from 'react';
 import axios from "axios";
 import { AuthContext } from '../ContextApi/AuthContext';
 import { Navigate } from 'react-router-dom';
+import { ThemeContext } from "../ContextApi/ThemeContext";
 
 
 export default function SplitScreen() {
   const [email,setEmail]=useState("eve.holt@reqres.in")
   const [password,setPassword]=useState("cityslicka")
   const {Login,isAuth}=useContext(AuthContext);
- 
+  const {theme}=useContext(ThemeContext)
 
+ 
+  
   const handleSubmit=()=>{
       axios.post("https://reqres.in/api/login",{
         email,
@@ -40,8 +43,8 @@ export default function SplitScreen() {
   }
 
   return (
-    <Stack minH={'100vh'} >
-      <Flex p={8} flex={1} align={'center'} justify={'center'}>
+    <Stack minH={'100vh'} bg={theme?"rgb(39,45,56)":"white"} color={theme?"white":"black"} >
+      <Flex  p={8} flex={1} align={'center'} justify={'center'}>
         <Stack spacing={4} w={'full'} maxW={'md'}>
           <Heading fontSize={'2xl'}>Sign in to your account</Heading>
           <FormControl id="email">

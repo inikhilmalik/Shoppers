@@ -1,13 +1,18 @@
 import { Box, Flex, Text } from "@chakra-ui/react"
 import Footer from '../Components/Footer';
 import Navbar from "../Components/Navbar";
+import { useContext } from "react";
+import { ThemeContext } from "../ContextApi/ThemeContext";
 
 
 function Homepage() {
+    const {theme}=useContext(ThemeContext)
+    console.log(theme)
     return (
-        <Box width={"92%"} m={"auto"} >
+        <Box bg={theme?"black":"white"} border={theme?"1px solid black":"1px solid white"}>
+            <Box width={"92%"} m={"auto"}  >
             <Box
-                style={{ backgroundColor: "rgb(230,229,232)" }}
+                backgroundColor= {theme?"grey":"rgb(230,229,232)"} 
                 m={"auto"}
                 mt={"20px"}
                 color="rgb(166,22,43)"
@@ -21,7 +26,7 @@ function Homepage() {
                     Shop Now</span>
             </Box>
 
-            <Box mt={"1.5%"} >
+            <Box  mt={"1.5%"}  >
                 <img src="https://images.dxl.com/is/image/CasualMale/230215_DXL_HP_FEB_4605_D3_Non_Vday?$sclp$" alt="pic" />
             </Box>
             <Box display={"flex"} textAlign={"start"} >
@@ -30,7 +35,7 @@ function Homepage() {
                     <p>Synrgy Performance Mélange Flat-Front Suit Pants</p>
                     <Text fontWeight={"700"}>INR 2,861.00</Text>
                 </Box  >
-                <Box p={"0px 10px"} >
+                <Box  p={"0px 10px"} >
                     <img src="https://images.dxl.com/is/image/CasualMale/pG3356?$slist$" alt="pic" />
                     <p>Harbor Bay Moisture-Wicking Pocket T-Shirt</p>
                     <Text fontWeight={"700"}>INR 2,680.00</Text>
@@ -108,6 +113,7 @@ function Homepage() {
                 </Box>
             </Flex>
             <Footer />
+        </Box>
         </Box>
     );
 }

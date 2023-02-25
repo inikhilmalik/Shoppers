@@ -26,21 +26,27 @@ import {
     ChevronDownIcon,
     ChevronRightIcon,
   } from '@chakra-ui/icons';
+import { useContext } from "react";
+import { Link as RouterLink } from "react-router-dom";
+import { AuthContext } from "../ContextApi/AuthContext";
+import { ThemeContext } from "../ContextApi/ThemeContext";
 
-  import { Link as RouterLink } from "react-router-dom";
 
   export default function Navbar() {
     const { isOpen, onToggle } = useDisclosure();
+    const {isAuth,Logout}=useContext(AuthContext)
+    const {theme,toggleTheme}=useContext(ThemeContext)
   
     return (
-      <Box >
+      <Box bg={theme?"black" :"white"}
+          color={theme?"white" :"black"} >
         <Flex
-          bg={useColorModeValue('white', 'gray.800')}
-          color={useColorModeValue('gray.600', 'white')}
+          bg={theme?"black" :"white"}
+          color={theme?"white" :"black"}
+
           minH={'90px'}
           py={{ base: 2 }}
           px={{ base: 4 }}
-        //   border={2}
           borderStyle={'solid'}
           borderColor={"black"}
           align={'center'}>
@@ -50,7 +56,7 @@ import {
             <img style={{margin:"0px 20px 0px 0px"}}  width="150px" src={REACTLOGO} alt="logo" />
           </RouterLink>
             
-           <Input width="80%" bg={"whitesmoke"} height="50px" placeholder="SEARCH" style={{border:"1px solid black",borderRadius:"0px"}} />
+           <Input color={theme?"white":"black"} bg={theme?"black":"whitesmoke"} width="80%"  height="50px" placeholder="SEARCH" border={theme?"1px solid white":"1px solid black"} borderRadius="0px" />
   
             
           </Flex>
@@ -63,17 +69,19 @@ import {
             ml={3}
             mr={{lg:10}}
             >
-          
 
-            <RouterLink >
-                DARK MODE
+            <RouterLink onClick={toggleTheme} >
+               {theme?"LIGHT MODE":"DARK MODE"}
             </RouterLink>
             <RouterLink  >
                 ORDER STATUS
             </RouterLink>
-            <RouterLink to="/login" >
-                LOGIN
-            </RouterLink>
+            {
+                isAuth?
+                <RouterLink onClick={Logout} to="/">LOGOUT</RouterLink>:
+                <RouterLink to="/login" >LOGIN</RouterLink>
+            }
+            
             <RouterLink to="/cart" >
                 CART
             </RouterLink>
@@ -86,7 +94,7 @@ import {
           py={2}
           borderBottom={1}
           borderStyle={'solid'}
-          borderColor={"black"}
+          borderColor={theme?"white":"black"}
           align={'start'}
           justifyContent={"space-evenly"}
           width="92%"

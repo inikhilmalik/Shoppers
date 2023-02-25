@@ -15,7 +15,8 @@ import {
   import { FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
   import { BiMailSend } from 'react-icons/bi';
   import REACTLOGO from "../Image/Shoppers-LOGO.png"
-
+  import { ThemeContext } from "../ContextApi/ThemeContext";
+  import { useContext } from 'react';
 
 //   const Logo = (props) => {
 //     return (
@@ -40,10 +41,11 @@ import {
     children,
     label,
     href,
+    theme
   }) => {
     return (
       <chakra.button
-        bg={useColorModeValue('blackAlpha.100', 'whiteAlpha.100')}
+        bg={theme?'whiteAlpha.100':'blackAlpha.100'}
         rounded={'full'}
         w={8}
         h={8}
@@ -55,7 +57,7 @@ import {
         justifyContent={'center'}
         transition={'background 0.3s ease'}
         _hover={{
-          bg: useColorModeValue('blackAlpha.200', 'whiteAlpha.200'),
+          bg: theme?'whiteAlpha.200':'blackAlpha.200',
         }}>
         <VisuallyHidden>{label}</VisuallyHidden>
         {children}
@@ -71,33 +73,37 @@ import {
     );
   };
   
-  export default function LargeWithNewsletter() {
+  export default function Footer() {
+    const {theme}=useContext(ThemeContext)
+
+
     return (
       <Box
         mt={100}
         p={"80px 0px"}
-        bg={useColorModeValue('gray.50', 'gray.900')}
-        color={useColorModeValue('gray.700', 'gray.200')}>
+        bg={theme?"rgb(26,32,44)":'gray.100'}
+        color={theme?"white":"gray.700"}>
         <Container as={Stack} maxW={'6xl'} py={10}>
           <SimpleGrid
             templateColumns={{ sm: '1fr 1fr', md: '2fr 1fr 1fr 2fr' }}
             spacing={8}>
             <Stack spacing={6}>
               <Box>
-                <img src={REACTLOGO} />
+               
+                <img  width="100%" src={REACTLOGO} />
                 {/* <Logo color={useColorModeValue('gray.700', 'white')} /> */}
               </Box>
               <Text fontSize={'sm'}>
                 © 2022 Shoppers. All rights reserved
               </Text>
               <Stack direction={'row'} spacing={6}>
-                <SocialButton label={'Twitter'} href={'#'}>
+                <SocialButton label={'Twitter'} href={'#'} theme={theme}>
                   <FaTwitter />
                 </SocialButton>
-                <SocialButton label={'YouTube'} href={'#'}>
+                <SocialButton label={'YouTube'} href={'#'} theme={theme}>
                   <FaYoutube />
                 </SocialButton>
-                <SocialButton label={'Instagram'} href={'#'}>
+                <SocialButton label={'Instagram'} href={'#'} theme={theme}>
                   <FaInstagram />
                 </SocialButton>
               </Stack>
@@ -123,15 +129,15 @@ import {
               <Stack direction={'row'}>
                 <Input
                   placeholder={'Your email address'}
-                  bg={useColorModeValue('blackAlpha.100', 'whiteAlpha.100')}
+                  bg={theme?'whiteAlpha.100':'blackAlpha.100'}
                   border={0}
                   _focus={{
                     bg: 'whiteAlpha.300',
                   }}
                 />
                 <IconButton
-                  bg={useColorModeValue('green.400', 'green.800')}
-                  color={useColorModeValue('white', 'gray.800')}
+                  bg={theme?'green.400':'green.400'}
+                  color={theme? 'white':'gray.800'}
                   _hover={{
                     bg: 'green.600',
                   }}

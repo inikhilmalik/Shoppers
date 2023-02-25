@@ -13,11 +13,13 @@ import {
   import { BsStar, BsStarFill, BsStarHalf } from 'react-icons/bs';
   import { FiShoppingCart } from 'react-icons/fi';
   import axios from "axios"
-  import { useState } from 'react';
+  import { useContext } from 'react';
+  import { ThemeContext } from "../ContextApi/ThemeContext";
 
   
   
   function CartCard({title,image,price,id,handleRemove}) {
+    const {theme}=useContext(ThemeContext)
 
     const data = {
         isNew: true,
@@ -34,7 +36,8 @@ import {
     return (
       <Flex p={3}  alignItems="center" justifyContent="center">
         <Box
-          bg={useColorModeValue('white', 'gray.800')}
+          bg={theme?"black":"white"}
+          color={theme?"white":"black"}
           width="340px"
           borderWidth="1px"
           rounded="lg"
@@ -59,7 +62,7 @@ import {
             
           />
             
-          <Box p="4" borderTop={"1px solid black"} >
+          <Box p="4" borderTop={theme?"1px solid white":"1px solid black"} >
             <Box  d="flex" alignItems="baseline" textAlign={"start"}>
               
             </Box>
@@ -76,8 +79,8 @@ import {
             </Flex>
   
             <Flex justifyContent="space-between" mt="3"  >
-              <Box fontSize="2xl" color={useColorModeValue('gray.800', 'white')}>
-                <Box as="span" color={'gray.600'} fontSize="lg">
+              <Box fontSize="2xl" color={theme?"white":"black"}>
+                <Box as="span" color={theme?"white":'gray.500'} fontSize="lg">
                   Rs.
                 </Box>
                 {data.price}
@@ -90,7 +93,7 @@ import {
                 color={'gray.800'}
                 fontSize={'0.9em'}>
                 <chakra.a  display={'flex'}>
-                    <Button onClick={()=>handleDelete(id)} p={3} fontSize={14} bg="red.200" >REMOVE</Button>
+                    <Button onClick={()=>handleDelete(id)} p={3} fontSize={14} color="black" bg="red.200" >REMOVE</Button>
                 </chakra.a>
               </Tooltip>
             </Flex>
