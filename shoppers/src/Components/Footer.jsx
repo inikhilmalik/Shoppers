@@ -79,7 +79,7 @@ import {
 
 
     return (
-      <Box
+      <Box 
         mt={100}
         p={"80px 0px"}
         bg={theme?"rgb(26,32,44)":'gray.100'}

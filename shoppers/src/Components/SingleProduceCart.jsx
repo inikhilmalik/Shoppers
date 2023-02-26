@@ -18,10 +18,17 @@ import {
   } from '@chakra-ui/react';
   import { FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
   import { MdLocalShipping } from 'react-icons/md';
+  import { ThemeContext } from "../ContextApi/ThemeContext";
+  import { useContext } from 'react';
+
   
   export default function SingleProductCart({id,title,image,price}) {
+    const {theme}=useContext(ThemeContext)
+
+    // bg={"black"} color={"white"}
     return (
-      <Container maxW={'7xl'}>
+      
+      <Container maxW={'7xl'}  >
         <SimpleGrid
           columns={{ base: 1, lg: 2 }}
           spacing={{ base: 8, md: 10 }}
