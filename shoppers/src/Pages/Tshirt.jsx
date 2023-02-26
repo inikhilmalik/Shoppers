@@ -72,7 +72,7 @@ function Tshirt() {
     <Box bg={theme?"black":"white"}>
       <Box m="auto" width={"92%"} p={2} >
       <Box m="auto" width={"98%"} >
-        <Flex justifyContent={"space-between"}>
+        <Flex justifyContent={"space-between"} direction={{base:"column",sm:"column",md:"row",lg:"row",'2xl':"row"}} >
 
           <Box >
             <Button isDisabled={page===1} onClick={()=>setPage(page-1)} color={theme?"white":"black"} bg={theme?"black":"white"} borderRadius="0px" >PRE</Button>
@@ -81,7 +81,7 @@ function Tshirt() {
           </Box>
 
           <Box >
-            <Flex >
+            <Flex direction={{base:"column",sm:"column",md:"row",lg:"row",'2xl':"row"}}  >
               <Input placeholder="SEARCH BRANDS"
                border={theme?"1px solid white":"1px solid black"}
                borderRadius="0px" 
@@ -89,7 +89,7 @@ function Tshirt() {
                color={theme?"white":"black"}
                 />
 
-              <Select onChange={handleSort} ml={"10px"} width={"280px"} color={theme?"white":"black"} placeholder="SORT"  border={theme?"1px solid white":"1px solid black"} borderRadius="0px" >
+              <Select  mt={{base:"5px",sm:"5px",md:"0px",lg:"0px"}} onChange={handleSort} ml={{base:"0px",sm:"0px",md:"10px",lg:"10px"}} width={"280px"} color={theme?"white":"black"} placeholder="SORT"  border={theme?"1px solid white":"1px solid black"} borderRadius="0px" >
                 <option value="asc">PRICE (LOW-HIGH)</option>
                 <option value="desc">PRICE (HIGH-LOW)</option>
               </Select>

@@ -39,8 +39,7 @@ function SingleProduct() {
   {
     return <h1>Something Went Wrong</h1>
   }
-  console.log(data)
-  console.log(params.id)
+
   return (
     <Box m="auto" width={"92%"} mt={2} >
     
