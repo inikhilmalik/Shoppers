@@ -18,12 +18,9 @@ import {
   } from '@chakra-ui/react';
   import { FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
   import { MdLocalShipping } from 'react-icons/md';
-  import { ThemeContext } from "../ContextApi/ThemeContext";
-  import { useContext } from 'react';
 
   
   export default function SingleProductCart({id,title,image,price}) {
-    const {theme}=useContext(ThemeContext)
 
     // bg={"black"} color={"white"}
     return (
