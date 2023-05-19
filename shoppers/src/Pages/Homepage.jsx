@@ -9,7 +9,7 @@ function Homepage() {
     const {theme}=useContext(ThemeContext)
     console.log(theme)
     return (
-        <Box bg={theme?"black":"white"} border={theme?"1px solid black":"1px solid white"}>
+        <Box bg={theme?"black":"white"} color={theme?"white":"black"} border={theme?"1px solid black":"1px solid white"}>
             <Box width={"92%"} m={"auto"}  >
             <Box
                 backgroundColor= {theme?"grey":"rgb(230,229,232)"} 
@@ -29,7 +29,7 @@ function Homepage() {
             <Box  mt={"1.5%"}  >
                 <img src="https://images.dxl.com/is/image/CasualMale/230215_DXL_HP_FEB_4605_D3_Non_Vday?$sclp$" alt="pic" />
             </Box>
-            <Box display={"flex"} textAlign={"start"} >
+            <Box display={"flex"} textAlign={"start"} flexDirection={{base:"column",sm:"column",md:"row",lg:"row",'2xl':"row"}} >
                 <Box p={"0px 10px"}  >
                     <img src="https://images.dxl.com/is/image/CasualMale/pG4935?$slist$" alt="pic" />
                     <p>Synrgy Performance Mélange Flat-Front Suit Pants</p>
@@ -59,7 +59,7 @@ function Homepage() {
             <Box   >
                 <img src="https://images.dxl.com/is/image/CasualMale/230201_DXL_HP_FEB_4605_D7?$sclp$" alt="pic" />
             </Box>
-            <Box display={"flex"} justifyContent={"space-evenly"} textAlign={"center"} >
+            <Box display={"flex"} justifyContent={"space-evenly"} textAlign={"center"}  >
                 <Box p={"0px 10px"}  >
                     <img src="https://images.dxl.com/is/image/CasualMale/230201_DXL_HP_FEB_4605_C1?$car203$" alt="pic" />
                     <p>Casual Shirts</p>

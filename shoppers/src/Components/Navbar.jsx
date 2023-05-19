@@ -1,5 +1,6 @@
 import React from "react";
 import REACTLOGO from "../Image/Shoppers-LOGO.png"
+import REACTLOGO2 from "../Image/Shoppers-LOGO2.png"
 import {
     Box,
     Flex,
@@ -18,7 +19,8 @@ import {
     useDisclosure,
     Input,
     Img,
-    Center
+    Center,
+    Grid
   } from '@chakra-ui/react';
   import {
     HamburgerIcon,
@@ -41,6 +43,7 @@ import { ThemeContext } from "../ContextApi/ThemeContext";
       <Box bg={theme?"black" :"white"}
           color={theme?"white" :"black"} >
         <Flex
+          direction={{base:"column-reverse",sm:"column-reverse",md:"row",lg:"row",'2xl':"row"}}
           bg={theme?"black" :"white"}
           color={theme?"white" :"black"}
 
@@ -53,7 +56,7 @@ import { ThemeContext } from "../ContextApi/ThemeContext";
           
           <Flex flex={{ base: 1 }}  h={"65px"} alignItems={"center"} ml={{lg:5}} justify={{ base: 'center', md: 'start' }}>
           <RouterLink to="/" >
-            <img style={{margin:"0px 20px 0px 0px"}}  width="150px" src={REACTLOGO} alt="logo" />
+            <img style={{margin:"0px 20px 0px 0px"}}  width="150px" src={theme?REACTLOGO2:REACTLOGO} alt="logo" />
           </RouterLink>
             
            <Input color={theme?"white":"black"} bg={theme?"black":"whitesmoke"} width="80%"  height="50px" placeholder="SEARCH" border={theme?"1px solid white":"1px solid black"} borderRadius="0px" />
@@ -65,7 +68,7 @@ import { ThemeContext } from "../ContextApi/ThemeContext";
             // flex={{ base: 1, md: 0 }}
             justify={'flex-end'}
             direction={'row'}
-            spacing={{sm:2,lg:6}}
+            spacing={{base:8,sm:8,md:4,lg:6}}
             ml={3}
             mr={{lg:10}}
             >
@@ -73,29 +76,26 @@ import { ThemeContext } from "../ContextApi/ThemeContext";
             <RouterLink onClick={toggleTheme} >
                {theme?"LIGHT MODE":"DARK MODE"}
             </RouterLink>
-            <RouterLink  >
-                ORDER STATUS
-            </RouterLink>
             {
                 isAuth?
                 <RouterLink onClick={Logout} to="/">LOGOUT</RouterLink>:
                 <RouterLink to="/login" >LOGIN</RouterLink>
             }
             
-            <RouterLink to="/cart" >
+            <RouterLink to="/cart"  >
                 CART
             </RouterLink>
             
           </Stack>
         </Flex>
-
-        <Flex
+          
+        <Grid
+          gridTemplateColumns={{base:"repeat(4,1fr)",sm:"repeat(4,1fr)",md:"repeat(8,1fr)",lg:"repeat(8,1fr)",'2xl':"repeat(8,1fr)"}}
           minH={'45px'}
           py={2}
           borderBottom={1}
           borderStyle={'solid'}
           borderColor={theme?"white":"black"}
-          align={'start'}
           justifyContent={"space-evenly"}
           width="92%"
           m={"auto"}
@@ -128,7 +128,7 @@ import { ThemeContext } from "../ContextApi/ThemeContext";
               
             
             
-        </Flex>
+        </Grid>
 
       </Box>
     );

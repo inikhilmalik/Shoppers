@@ -15,6 +15,7 @@ import {
   import { FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
   import { BiMailSend } from 'react-icons/bi';
   import REACTLOGO from "../Image/Shoppers-LOGO.png"
+  import REACTLOGO2 from "../Image/Shoppers-LOGO2.png"
   import { ThemeContext } from "../ContextApi/ThemeContext";
   import { useContext } from 'react';
 
@@ -57,7 +58,7 @@ import {
         justifyContent={'center'}
         transition={'background 0.3s ease'}
         _hover={{
-          bg: theme?'whiteAlpha.200':'blackAlpha.200',
+          bg: theme?'blackAlpha.200':'whiteAlpha.200'
         }}>
         <VisuallyHidden>{label}</VisuallyHidden>
         {children}
@@ -78,7 +79,7 @@ import {
 
 
     return (
-      <Box
+      <Box 
         mt={100}
         p={"80px 0px"}
         bg={theme?"rgb(26,32,44)":'gray.100'}
@@ -90,7 +91,7 @@ import {
             <Stack spacing={6}>
               <Box>
                
-                <img  width="100%" src={REACTLOGO} />
+                <img  width="100%" src={theme?REACTLOGO2:REACTLOGO} />
                 {/* <Logo color={useColorModeValue('gray.700', 'white')} /> */}
               </Box>
               <Text fontSize={'sm'}>
