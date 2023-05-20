@@ -66,7 +66,7 @@ function Tshirt() {
   {
     return <h1>Something Went Wrong</h1>
   }
-  console.log(data)
+  // console.log(data)
   // console.log(order)
   return (
     <Box bg={theme?"black":"white"}>

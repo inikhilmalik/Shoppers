@@ -7,7 +7,7 @@ import { ThemeContext } from "../ContextApi/ThemeContext";
 
 function Homepage() {
     const {theme}=useContext(ThemeContext)
-    console.log(theme)
+    // console.log(theme)
     return (
         <Box bg={theme?"black":"white"} color={theme?"white":"black"} border={theme?"1px solid black":"1px solid white"}>
             <Box width={"92%"} m={"auto"}  >
