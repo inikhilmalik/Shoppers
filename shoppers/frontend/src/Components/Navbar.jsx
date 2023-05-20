@@ -103,7 +103,7 @@ import { ThemeContext } from "../ContextApi/ThemeContext";
           m={"auto"}
           >
             
-            <RouterLink  >
+            <RouterLink to="/pant" >
                 NEW+NOW
             </RouterLink>
             <RouterLink to="/shirt"  >
@@ -115,16 +115,16 @@ import { ThemeContext } from "../ContextApi/ThemeContext";
             <RouterLink to="/pant"  >
                 PANTS
             </RouterLink>
-            <RouterLink   >
+            <RouterLink to="/shirt"   >
                 SHOES
             </RouterLink>
-            <RouterLink   >
+            <RouterLink  to="/tshirt" >
                 SUITING
             </RouterLink>
-            <RouterLink   >
+            <RouterLink to="/shirt"   >
                 ACTIVEWEAR
             </RouterLink>
-            <RouterLink   >
+            <RouterLink to="/pant"  >
                 SALE
             </RouterLink>
               

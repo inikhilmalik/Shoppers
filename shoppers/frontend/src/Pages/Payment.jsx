@@ -1,14 +1,16 @@
 import { Box, Button, Divider, Flex, Input, Text } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useToast } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { ThemeContext } from "../ContextApi/ThemeContext";
 
 
 const Payment = () => {
   const [state,setState]=useState([])
   const navigate=useNavigate()
   const toast = useToast();
+  const {theme}=useContext(ThemeContext)
   let total = 0;
 
   const getData = () => {
@@ -30,7 +32,7 @@ const Payment = () => {
 
   const handleClick = () => {
     toast({
-      title: "Payment successfully, Order is placed",
+      title: "Payment successfull, Order is placed",
       status: "success",
       duration: 4000,
       isClosable: true,
@@ -44,27 +46,27 @@ const Payment = () => {
   total+=40;
   
   return (
-    <div>
-      <Box backgroundColor="gray.50">
-        <Text color="black">Pay Using Card</Text>
-        <Divider mt={4} />
+    <Box minH={"90vh"}  bg={theme?"black":"white"}>
+      <Box  bg={theme?"black":"white"} >
+        <Text color={theme?"white":"black"} >Pay Using Card</Text>
+        {/* <Divider mt={4} /> */}
 
-        <Flex width="60%" p={2} justifyContent="space-between">
-          <Text color="black">Card Number</Text>
-          <Input width="50%" type="number" placeholder="Card Number" />
+        <Flex width="60%" mt="20px" p={2} justifyContent="space-between">
+          <Text color={theme?"white":"black"}>Card Number</Text>
+          <Input color={theme?"white":"black"} width="50%" type="number" placeholder="Card Number" />
         </Flex>
 
         <Flex width="60%" p={2} justifyContent="space-between">
-          <Text color="black">Expiry Date</Text>
+          <Text color={theme?"black":"black"}>Expiry Date</Text>
           <Box width="50%" display="flex" gap={2}>
-            <Input width="25%" type="number" placeholder="MM" />
-            <Text fontSize="2xl">/</Text>
-            <Input width="20%" type="number" placeholder="YY" />
+            <Input color={theme?"white":"black"} width="25%" type="number" placeholder="MM" />
+            <Text fontSize="2xl" color={theme?"white":"black"}>/</Text>
+            <Input color={theme?"white":"black"}  width="20%" type="number" placeholder="YY" />
 
-            <Text mt={1} color="black">
+            <Text mt={1} color={theme?"white":"black"}>
               CVV
             </Text>
-            <Input width="25%" type="number" placeholder="CVV" />
+            <Input color={theme?"white":"black"} width="25%" type="number" placeholder="CVV" />
           </Box>
         </Flex>
 
@@ -77,15 +79,15 @@ const Payment = () => {
         >
           PAY RS. {total}
         </Button>
-        <Text color="black" mt={5}>
+        <Text color={theme?"white":"black"} mt={5}>
           7 Days Easy Returns
         </Text>
-        <Text color="black">
+        <Text color={theme?"white":"black"}>
           Trustpay: 100% Payment Protection. Return or Replacement is applicable
           for 7 days after delivery{" "}
         </Text>
       </Box>
-    </div>
+    </Box>
   );
 };
 

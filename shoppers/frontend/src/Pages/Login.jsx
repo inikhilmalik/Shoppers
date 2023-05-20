@@ -74,8 +74,8 @@ export default function SplitScreen() {
   }
 
   return (
-    <Stack minH={'70vh'} bg={theme?"rgb(39,45,56)":"white"} color={theme?"white":"black"} >
-      <Flex  p={8} flex={1} align={'center'} justify={'center'}>
+    <Stack minH={'100vh'} bg={theme?"rgb(39,45,56)":"white"} color={theme?"white":"black"} >
+      <Flex  p={8} flex={1} mt="50px" justify={'center'}>
         <Stack spacing={4} w={'full'} maxW={'md'}>
           <Heading fontSize={'2xl'}>Sign in to your account</Heading>
           <FormControl id="email">
