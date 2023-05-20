@@ -15,8 +15,11 @@ import {
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link,useNavigate } from "react-router-dom";
+import { ThemeContext } from "../ContextApi/ThemeContext";
+
+
 const Address = () => {
   const addre = {
     pincode: "",
@@ -30,6 +33,7 @@ const Address = () => {
 
   const [add, setadd] = useState(addre);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const {theme}=useContext(ThemeContext)
   const navigate=useNavigate();
 
   const handlechange = (e) => {
@@ -60,7 +64,8 @@ const Address = () => {
   };
   return (
     <div>
-      <Box color="gray" width="70%" p={8}>
+      <Box minH={"82vh"} bg={theme?"black":"white"}>
+      <Box color="gray" width="70%" p={8} >
         <FormControl>
           <Flex justifyContent="space-between" gap={5}>
             <FormLabel height="40px" width="70%">
@@ -184,6 +189,7 @@ const Address = () => {
             </AlertDialogOverlay>
           </AlertDialog>
         </FormControl>
+      </Box>
       </Box>
     </div>
   );
