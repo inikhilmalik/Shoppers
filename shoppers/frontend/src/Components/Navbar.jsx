@@ -36,7 +36,7 @@ import { ThemeContext } from "../ContextApi/ThemeContext";
 
   export default function Navbar() {
     const { isOpen, onToggle } = useDisclosure();
-    const {isAuth,Logout}=useContext(AuthContext)
+    const {isAuth,Logout,name}=useContext(AuthContext)
     const {theme,toggleTheme}=useContext(ThemeContext)
   
     return (
@@ -63,7 +63,8 @@ import { ThemeContext } from "../ContextApi/ThemeContext";
   
             
           </Flex>
-  
+
+
           <Stack
             // flex={{ base: 1, md: 0 }}
             justify={'flex-end'}
@@ -72,6 +73,7 @@ import { ThemeContext } from "../ContextApi/ThemeContext";
             ml={3}
             mr={{lg:10}}
             >
+              {name&&<Text fontWeight={500} color={"rgb(170,34,54)"} >Hii, {name}</Text>}
 
             <RouterLink onClick={toggleTheme} >
                {theme?"LIGHT MODE":"DARK MODE"}

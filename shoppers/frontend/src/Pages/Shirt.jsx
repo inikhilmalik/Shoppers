@@ -8,10 +8,10 @@ import { ThemeContext } from "../ContextApi/ThemeContext";
 
 
 const getData = (page) => {
-  return axios.get(`https://long-blue-goshawk-suit.cyclic.app/pant?_page=${page}&_limit=20`)
+  return axios.get(`https://long-blue-goshawk-suit.cyclic.app/shirt?_page=${page}&_limit=20`)
 }
 
-function Pant() {
+function Shirt() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -19,7 +19,6 @@ function Pant() {
   const [searchQuery, setSearchQuery] = useState("");
   const [page,setPage]=useState(1);
   const {theme}=useContext(ThemeContext)
-
 
   const fetched = () => {
     setLoading(true);
@@ -38,16 +37,16 @@ function Pant() {
     {
       // setLoading(true)
       let params=searchQuery?{q:searchQuery}:{}
-      axios.get(`https://long-blue-goshawk-suit.cyclic.app/pant?_page=${page}&_limit=20&_sort=price&_order=${order}`,{
+      axios.get(`https://long-blue-goshawk-suit.cyclic.app/shirt?_page=${page}&_limit=20&_sort=price&_order=${order}`,{
         params
       })
       .then((res) => setData(res.data))
       .catch((err) => setError(err))
     }
-    else if(order)
+    else 
     {
       setLoading(true)
-      axios.get(`https://long-blue-goshawk-suit.cyclic.app/pant?_page=${page}&_limit=20&_sort=price&_order=${order}`)
+      axios.get(`https://long-blue-goshawk-suit.cyclic.app/shirt?_page=${page}&_limit=20&_sort=price&_order=${order}`)
       .then((res) => setData(res.data))
       .catch((err) => setError(err))
       .finally(()=>setLoading(false))
@@ -60,24 +59,24 @@ function Pant() {
 
   if(loading)
   {
-    return <Spinner mt={40} />
+    return <Spinner mt={40}  />
   }
   if(error)
   {
     return <h1>Something Went Wrong</h1>
   }
-  console.log(data)
+  // console.log(data)
   // console.log(order)
   return (
-    <Box  bg={theme?"black":"white"}  >
-      <Box m="auto" width={"92%"} p={2}  >
-      <Box m="auto" width={"98%"}  >
-        <Flex justifyContent={"space-between"} direction={{base:"column",sm:"column",md:"row",lg:"row",'2xl':"row"}} >
+    <Box  bg={theme?"black":"white"} >
+      <Box m="auto" width={"92%"} pt={2}  >
+      <Box m="auto" width={"98%"} >
+        <Flex justifyContent={"space-between"} direction={{base:"column",sm:"column",md:"row",lg:"row",'2xl':"row"}}>
 
           <Box >
-            <Button isDisabled={page===1} onClick={()=>setPage(page-1)}  color={theme?"white":"black"} bg={theme?"black":"white"} borderRadius="0px" >PRE</Button>
+            <Button  isDisabled={page===1} onClick={()=>setPage(page-1)} color={theme?"white":"black"} bg={theme?"black":"white"} borderRadius="0px" >PRE</Button>
             <Button m={1} borderRadius="50%" >{page}</Button>
-            <Button isDisabled={page===Math.ceil(42/20)} onClick={()=>setPage(page+1)} color={theme?"white":"black"} bg={theme?"black":"white"} borderRadius="0px" >NEXT</Button>
+            <Button isDisabled={page===Math.ceil(62/20)} onClick={()=>setPage(page+1)} color={theme?"white":"black"} bg={theme?"black":"white"} borderRadius="0px" >NEXT</Button>
           </Box>
 
           <Box >
@@ -89,8 +88,8 @@ function Pant() {
                color={theme?"white":"black"}
                 />
 
-              <Select mt={{base:"5px",sm:"5px",md:"0px",lg:"0px"}} ml={{base:"0px",sm:"0px",md:"10px",lg:"10px"}} onChange={handleSort} border={theme?"1px solid white":"1px solid black"} color={theme?"white":"black"} width={"280px"} placeholder="SORT" borderRadius="0px" >
-                <option value="asc">PRICE (LOW-HIGH)</option>
+              <Select mt={{base:"5px",sm:"5px",md:"0px",lg:"0px"}} onChange={handleSort} ml={{base:"0px",sm:"0px",md:"10px",lg:"10px"}} width={"280px"} placeholder="SORT" border={theme?"1px solid white":"1px solid black"}  color={theme?"white":"black"} borderRadius="0px" >
+                <option  value="asc">PRICE (LOW-HIGH)</option>
                 <option value="desc">PRICE (HIGH-LOW)</option>
               </Select>
 
@@ -101,11 +100,11 @@ function Pant() {
       </Box >
 
       <Box >
-        <Grid  templateColumns={{sm:'repeat(1, 1fr)',md:'repeat(2, 1fr)',lg:'repeat(3, 1fr)',"2xl":'repeat(4, 1fr)'}}   >
+        <Grid templateColumns={{sm:'repeat(1, 1fr)',md:'repeat(2, 1fr)',lg:'repeat(3, 1fr)',"2xl":'repeat(4, 1fr)'}}   >
           {
             data.map((item) => (
               <GridItem key={item.id} >
-                <Card id={item.id} image={item.url} title={item.title} price={item.price} />
+                <Card  id={item.id} image={item.url} title={item.title} price={item.price} />
               </GridItem>
             ))
           }
@@ -118,7 +117,7 @@ function Pant() {
   );
 }
 
-export default Pant;
+export default Shirt;
 
 
   // https://long-blue-goshawk-suit.cyclic.app

@@ -9,32 +9,63 @@ import {
   Link,
   Stack,
   Image,
+  Text,
+  Box,
+  useToast
 } from '@chakra-ui/react';
 import { useState,useContext } from 'react';
 import axios from "axios";
 import { AuthContext } from '../ContextApi/AuthContext';
-import { Navigate } from 'react-router-dom';
+import { Navigate,Link as RouterLink } from 'react-router-dom';
 import { ThemeContext } from "../ContextApi/ThemeContext";
 
 
 export default function SplitScreen() {
-  const [email,setEmail]=useState("eve.holt@reqres.in")
-  const [password,setPassword]=useState("cityslicka")
+  const [email,setEmail]=useState("")
+  const [password,setPassword]=useState("")
+  const [state,setState]=useState("")
   const {Login,isAuth}=useContext(AuthContext);
   const {theme}=useContext(ThemeContext)
-
+  const toast = useToast();
  
   
   const handleSubmit=()=>{
-      axios.post("https://reqres.in/api/login",{
+      if(email&&password)
+      {
+        axios.post("https://fine-plum-rooster-hat.cyclic.app/login",{
         email,
         password
       })
       .then((res)=>{
-        // console.log(res.data.token)
-        Login(res.data.token)
+        // console.log(res.data)
+        toast({
+          title:res.data.message ,
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+        Login(res.data.token,res.data.name)
+        setEmail("")
+        setPassword("")
       })
-      .catch((err)=>console.log(err))
+      .catch((err)=>{
+        toast({
+          title:err.response.data.message ,
+          status: "error",
+          duration: 2000,
+          isClosable: true,
+        });
+    })
+      }
+      else
+      {
+        toast({
+          title:"Please fill all credentials" ,
+          status: "warning",
+          duration: 2000,
+          isClosable: true,
+        });
+      }
   }
 
   if(isAuth)
@@ -43,7 +74,7 @@ export default function SplitScreen() {
   }
 
   return (
-    <Stack minH={'100vh'} bg={theme?"rgb(39,45,56)":"white"} color={theme?"white":"black"} >
+    <Stack minH={'70vh'} bg={theme?"rgb(39,45,56)":"white"} color={theme?"white":"black"} >
       <Flex  p={8} flex={1} align={'center'} justify={'center'}>
         <Stack spacing={4} w={'full'} maxW={'md'}>
           <Heading fontSize={'2xl'}>Sign in to your account</Heading>
@@ -61,7 +92,10 @@ export default function SplitScreen() {
               align={'start'}
               justify={'space-between'}>
               <Checkbox>Remember me</Checkbox>
-              <Link color={'blue.500'}>Forgot password?</Link>
+              <Box>
+                Create a new account? 
+              <RouterLink to={"/signup"} color={'blue'}><Button variant={"link"} color={"blue"} ml="5px"> sign up</Button></RouterLink>
+              </Box>
             </Stack>
             <Button onClick={handleSubmit} colorScheme={'blue'} variant={'solid'}>
               Sign in
@@ -69,7 +103,7 @@ export default function SplitScreen() {
           </Stack>
         </Stack>
       </Flex>
-    
+      {state&& <Text fontSize={20} fontWeight={500} mt={"20px"} >{state}</Text>}
     </Stack>
   );
 }

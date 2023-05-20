@@ -4,7 +4,7 @@ import { Grid, GridItem, Box, Flex, Text, Input, Select, Button, Spinner } from 
 import CartCard from "../Components/CartCard";
 import Navbar from "../Components/Navbar";
 import { AuthContext } from "../ContextApi/AuthContext";
-import { Navigate } from "react-router-dom";
+import { Link,Navigate, useNavigate } from "react-router-dom";
 import { ThemeContext } from "../ContextApi/ThemeContext";
 
 
@@ -20,6 +20,7 @@ function Cart() {
   const [searchQuery, setSearchQuery] = useState("");
   const {isAuth}=useContext(AuthContext);
   const {theme}=useContext(ThemeContext)
+  const navigate=useNavigate()
 
   let Total = 0;
 
@@ -76,7 +77,7 @@ function Cart() {
   }
 
   const handleCheckout=()=>{
-    alert("Order Placed");
+    Total!=0&& navigate("/address")
   }
 
   if(!isAuth)
@@ -84,9 +85,10 @@ function Cart() {
     return <Navigate to="/login" />
   }
   
-  console.log(data)
+  // console.log(data)
   return (
     <Box bg={theme?"black":"white"} color={theme?"white":"black"} minH="100vh" >
+      
       <Box m="auto" width={"92%"} pt={2}  >
       <Flex justifyContent={"space-between"} width={"99%"} direction={{base:"column-reverse",sm:"column-reverse",md:"column-reverse",lg:"row",'2xl':"row"}}  >
         <Box >
@@ -100,7 +102,9 @@ function Cart() {
             }
 
           </Grid>
+
         </Box>
+          {Total===0&&<Text fontSize={30} fontWeight={500} >Cart is empty !</Text>}
         <Box   border={theme?"1px solid white":"1px solid black"} height={"100%"} width={{base:"98%",sm:"98%", md:"98%",lg:"20%"}} mt={3} p="5px 15px" >
           <Box >
             <Text borderBottom={theme?"1px solid white":"1px solid black"}  fontSize={25} fontWeight="700" >ORDER SUMMARY</Text>
