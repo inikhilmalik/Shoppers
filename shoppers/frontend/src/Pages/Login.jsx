@@ -18,11 +18,12 @@ import axios from "axios";
 import { AuthContext } from '../ContextApi/AuthContext';
 import { Navigate,Link as RouterLink } from 'react-router-dom';
 import { ThemeContext } from "../ContextApi/ThemeContext";
+import { BASE_URL } from '../utlis';
 
 
 export default function SplitScreen() {
-  const [email,setEmail]=useState("")
-  const [password,setPassword]=useState("")
+  const [email,setEmail]=useState("user@gmail.com")
+  const [password,setPassword]=useState("user")
   const [state,setState]=useState("")
   const {Login,isAuth}=useContext(AuthContext);
   const {theme}=useContext(ThemeContext)
@@ -32,14 +33,14 @@ export default function SplitScreen() {
   const handleSubmit=()=>{
       if(email&&password)
       {
-        axios.post("https://fine-plum-rooster-hat.cyclic.app/login",{
+        axios.post(`${BASE_URL}/login`,{
         email,
         password
       })
       .then((res)=>{
         // console.log(res.data)
         toast({
-          title:res.data.message ,
+          title:"Login Successfull" ,
           status: "success",
           duration: 3000,
           isClosable: true,

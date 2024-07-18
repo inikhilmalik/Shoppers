@@ -8,10 +8,11 @@ import {useParams} from "react-router-dom"
 import SingleProductCart from "../Components/SingleProduceCart";
 import { useContext } from 'react';
 import { ThemeContext } from "../ContextApi/ThemeContext";
+import { BASE_URL } from "../utlis";
 
 
 const getData = (id) => {
-  return axios.get(`https://long-blue-goshawk-suit.cyclic.app/shirt/${id}`)
+  return axios.get(`${BASE_URL}/shirt/${id}`)
 }
 
 function SingleProduct() {

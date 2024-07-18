@@ -6,10 +6,11 @@ import Navbar from "../Components/Navbar";
 import { AuthContext } from "../ContextApi/AuthContext";
 import { Link,Navigate, useNavigate } from "react-router-dom";
 import { ThemeContext } from "../ContextApi/ThemeContext";
+import { BASE_URL } from "../utlis";
 
 
 const getData = () => {
-  return axios.get(`https://long-blue-goshawk-suit.cyclic.app/cart`)
+  return axios.get(`${BASE_URL}/cart`)
 }
 
 function Cart() {
@@ -37,7 +38,7 @@ function Cart() {
   }, [])
 
   const handleRemove = (id) => {
-    axios.delete(`https://long-blue-goshawk-suit.cyclic.app/cart/${id}`)
+    axios.delete(`${BASE_URL}/cart/${id}`)
       .then(() => fetched())
       .catch(() => fetched())
   }
@@ -46,7 +47,7 @@ function Cart() {
     if (searchQuery) {
       // setLoading(true)
       let params = searchQuery ? { q: searchQuery } : {}
-      axios.get(`https://long-blue-goshawk-suit.cyclic.app/cart?_sort=price&_order=${order}`, {
+      axios.get(`${BASE_URL}/cart?_sort=price&_order=${order}`, {
         params
       })
         .then((res) => setData(res.data))
@@ -54,7 +55,7 @@ function Cart() {
     }
     else if (order) {
       setLoading(true)
-      axios.get(`https://long-blue-goshawk-suit.cyclic.app/cart?_sort=price&_order=${order}`)
+      axios.get(`${BASE_URL}/cart?_sort=price&_order=${order}`)
         .then((res) => setData(res.data))
         .catch((err) => setError(err))
         .finally(() => setLoading(false))

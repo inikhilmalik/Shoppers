@@ -4,6 +4,7 @@ import { useToast } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ThemeContext } from "../ContextApi/ThemeContext";
+import { BASE_URL } from "../utlis";
 
 
 const Payment = () => {
@@ -14,7 +15,7 @@ const Payment = () => {
   let total = 0;
 
   const getData = () => {
-    return axios.get(`https://long-blue-goshawk-suit.cyclic.app/cart`)
+    return axios.get(`${BASE_URL}/cart`)
   }
 
   const fetched = () => {

@@ -5,10 +5,11 @@ import { Grid, GridItem, Box, Flex, Input, Select, Button, Spinner } from '@chak
 import Footer from '../Components/Footer';
 import Navbar from "../Components/Navbar";
 import { ThemeContext } from "../ContextApi/ThemeContext";
+import { BASE_URL } from "../utlis";
 
 
 const getData = (page) => {
-  return axios.get(`https://long-blue-goshawk-suit.cyclic.app/shirt?_page=${page}&_limit=20`)
+  return axios.get(`${BASE_URL}/shirt?_page=${page}&_limit=20`)
 }
 
 function Shirt() {
@@ -37,7 +38,7 @@ function Shirt() {
     {
       // setLoading(true)
       let params=searchQuery?{q:searchQuery}:{}
-      axios.get(`https://long-blue-goshawk-suit.cyclic.app/shirt?_page=${page}&_limit=20&_sort=price&_order=${order}`,{
+      axios.get(`${BASE_URL}/shirt?_page=${page}&_limit=20&_sort=price&_order=${order}`,{
         params
       })
       .then((res) => setData(res.data))
@@ -46,7 +47,7 @@ function Shirt() {
     else 
     {
       setLoading(true)
-      axios.get(`https://long-blue-goshawk-suit.cyclic.app/shirt?_page=${page}&_limit=20&_sort=price&_order=${order}`)
+      axios.get(`${BASE_URL}/shirt?_page=${page}&_limit=20&_sort=price&_order=${order}`)
       .then((res) => setData(res.data))
       .catch((err) => setError(err))
       .finally(()=>setLoading(false))

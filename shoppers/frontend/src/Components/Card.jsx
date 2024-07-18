@@ -16,6 +16,7 @@ import { useState } from 'react';
 import {Link as RouterLink} from "react-router-dom"
 import { ThemeContext } from "../ContextApi/ThemeContext";
 import { useContext } from 'react';
+import { BASE_URL } from '../utlis';
 
 function Card({ title, image, price, id }) {
   const {theme}=useContext(ThemeContext)
@@ -29,7 +30,7 @@ function Card({ title, image, price, id }) {
   };
 
   const handleCart = (id, title, image,price) => {
-    axios.post(`https://long-blue-goshawk-suit.cyclic.app/cart`, { title, image,price })
+    axios.post(`${BASE_URL}/cart`, { title, image,price })
   }
 
   return (
